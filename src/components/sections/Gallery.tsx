@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { assetUrl, GALLERY_ITEMS, LINKS, type GalleryItem } from '@data/siteContent';
 import {
   Badge,
@@ -29,8 +29,8 @@ function GalleryTile({
           <img
             src={assetUrl(item.image)}
             alt={item.title}
-            loading="lazy"
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            decoding="async"
+            className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
@@ -90,6 +90,11 @@ function GalleryLightboxContent({ item }: { item: GalleryItem }) {
 
 export function Gallery() {
   const [selected, setSelected] = useState<GalleryItem | null>(null);
+  const [, startTransition] = useTransition();
+
+  const handleSelect = (item: GalleryItem | null) => {
+    startTransition(() => setSelected(item));
+  };
 
   return (
     <Section id="momentos" surface="dark">
@@ -104,7 +109,7 @@ export function Gallery() {
 
       <StaggerGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {GALLERY_ITEMS.map((item) => (
-          <GalleryTile key={item.id} item={item} onSelect={setSelected} />
+          <GalleryTile key={item.id} item={item} onSelect={handleSelect} />
         ))}
       </StaggerGroup>
 
@@ -112,7 +117,7 @@ export function Gallery() {
 
       <Modal
         open={selected !== null}
-        onClose={() => setSelected(null)}
+        onClose={() => handleSelect(null)}
         ariaLabel={selected?.title ?? 'Visualizar foto'}
       >
         {selected && <GalleryLightboxContent item={selected} />}
