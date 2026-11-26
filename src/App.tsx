@@ -1,20 +1,31 @@
+import { lazy, Suspense } from 'react';
 import { MotionConfig } from 'motion/react';
 import { MessageCircle } from 'lucide-react';
-import {
-  AboutMinistry,
-  Footer,
-  Gallery,
-  Hero,
-  ImpactStats,
-  InstitutoSection,
-  Navbar,
-  NucleiSchedule,
-  Programs,
-  SupportSection,
-} from '@sections';
+import { AboutMinistry, Hero, ImpactStats, Navbar, Programs } from '@sections';
 import { Button, ScrollProgress } from '@ui';
 import { LINKS } from '@data/siteContent';
 import { useSmoothScroll } from '@hooks/useSmoothScroll';
+
+const NucleiSchedule = lazy(() =>
+  import('@sections/NucleiSchedule').then((m) => ({ default: m.NucleiSchedule })),
+);
+const InstitutoSection = lazy(() =>
+  import('@sections/InstitutoSection').then((m) => ({ default: m.InstitutoSection })),
+);
+const Gallery = lazy(() => import('@sections/Gallery').then((m) => ({ default: m.Gallery })));
+const SupportSection = lazy(() =>
+  import('@sections/SupportSection').then((m) => ({ default: m.SupportSection })),
+);
+const Footer = lazy(() => import('@sections/Footer').then((m) => ({ default: m.Footer })));
+
+function SectionFallback({ dark = false }: { dark?: boolean }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={dark ? 'h-96 bg-[#070B14] animate-pulse' : 'h-96 bg-slate-100 animate-pulse'}
+    />
+  );
+}
 
 export function App() {
   useSmoothScroll({ lerp: 0.095, wheelMultiplier: 1 });
@@ -29,12 +40,27 @@ export function App() {
           <ImpactStats />
           <AboutMinistry />
           <Programs />
-          <NucleiSchedule />
-          <InstitutoSection />
-          <Gallery />
-          <SupportSection />
+
+          <Suspense fallback={<SectionFallback />}>
+            <NucleiSchedule />
+          </Suspense>
+
+          <Suspense fallback={<SectionFallback />}>
+            <InstitutoSection />
+          </Suspense>
+
+          <Suspense fallback={<SectionFallback dark />}>
+            <Gallery />
+          </Suspense>
+
+          <Suspense fallback={<SectionFallback />}>
+            <SupportSection />
+          </Suspense>
         </main>
-        <Footer />
+
+        <Suspense fallback={<SectionFallback dark />}>
+          <Footer />
+        </Suspense>
 
         <Button
           href={LINKS.whatsapp}
