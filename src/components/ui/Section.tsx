@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { cn } from '../../lib/cn';
 import { Container } from './Container';
 
 export type SectionSurface = 'dark' | 'navy' | 'light' | 'muted' | 'brand';
@@ -28,17 +29,21 @@ export function Section({
   surface = 'light',
   pattern = false,
   compact = false,
-  className = '',
-  containerClassName = '',
+  className,
+  containerClassName,
   children,
 }: SectionProps) {
-  const paddingClass = compact ? 'py-10' : 'py-20 sm:py-24';
-
   return (
     <section
       id={id}
       aria-label={ariaLabel}
-      className={`relative ${SURFACE_CLASSES[surface]} ${pattern ? 'court-grid' : ''} ${paddingClass} ${className}`.trim()}
+      className={cn(
+        'relative',
+        SURFACE_CLASSES[surface],
+        pattern && 'court-grid',
+        compact ? 'py-10' : 'py-20 sm:py-24',
+        className,
+      )}
     >
       <Container className={containerClassName}>{children}</Container>
     </section>

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { cn } from '../../lib/cn';
 
 export type ButtonVariant =
   | 'primary'
@@ -58,19 +59,17 @@ export function Button({
   variant = 'primary',
   size = 'md',
   fullWidth = false,
-  className = '',
+  className,
   children,
   ...rest
 }: ButtonProps) {
-  const classes = [
+  const classes = cn(
     'inline-flex items-center justify-center rounded-full transition focus:outline-none focus:ring-2 focus:ring-[#F5821F]/70',
     VARIANT_CLASSES[variant],
     SIZE_CLASSES[size],
-    fullWidth ? 'w-full' : '',
+    fullWidth && 'w-full',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
   if ('href' in rest && rest.href !== undefined) {
     const { href, external = false, ariaLabel, onClick } = rest;

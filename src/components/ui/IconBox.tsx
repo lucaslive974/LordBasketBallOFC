@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { cn } from '../../lib/cn';
 
 export type IconBoxTone = 'blue' | 'solid-blue' | 'orange-dark' | 'muted';
 
@@ -22,15 +23,15 @@ const SIZE_CLASSES = {
   lg: 'h-12 w-12 rounded-2xl',
 };
 
-export function IconBox({
-  tone = 'blue',
-  size = 'md',
-  className = '',
-  children,
-}: IconBoxProps) {
+export function IconBox({ tone = 'blue', size = 'md', className, children }: IconBoxProps) {
   return (
     <div
-      className={`inline-flex shrink-0 items-center justify-center ${TONE_CLASSES[tone]} ${SIZE_CLASSES[size]} ${className}`.trim()}
+      className={cn(
+        'inline-flex shrink-0 items-center justify-center',
+        TONE_CLASSES[tone],
+        SIZE_CLASSES[size],
+        className,
+      )}
     >
       {children}
     </div>

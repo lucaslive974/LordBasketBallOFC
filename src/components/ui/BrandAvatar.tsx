@@ -1,4 +1,5 @@
 import { assetUrl } from '../../data/siteContent';
+import { cn } from '../../lib/cn';
 
 interface BrandAvatarProps {
   brand: 'lord' | 'instituto';
@@ -25,14 +26,14 @@ const SIZE_CLASSES = {
   lg: 'h-16 w-16',
 } as const;
 
-export function BrandAvatar({ brand, size = 'sm', className = '' }: BrandAvatarProps) {
+export function BrandAvatar({ brand, size = 'sm', className }: BrandAvatarProps) {
   const { src, alt, ring } = BRAND_CONFIG[brand];
 
   return (
     <img
       src={assetUrl(src)}
       alt={alt}
-      className={`shrink-0 rounded-full object-cover shadow-sm ${ring} ${SIZE_CLASSES[size]} ${className}`.trim()}
+      className={cn('shrink-0 rounded-full object-cover shadow-sm', ring, SIZE_CLASSES[size], className)}
     />
   );
 }

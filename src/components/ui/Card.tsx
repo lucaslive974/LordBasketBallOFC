@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { cn } from '../../lib/cn';
 
 export type CardVariant = 'light' | 'muted' | 'glass' | 'highlight-blue';
 
@@ -34,14 +35,17 @@ export function Card({
   variant = 'light',
   interactive = false,
   padding = 'md',
-  className = '',
+  className,
   children,
 }: CardProps) {
   return (
     <div
-      className={`${VARIANT_CLASSES[variant]} ${PADDING_CLASSES[padding]} ${
-        interactive ? HOVER_CLASSES[variant] : ''
-      } ${className}`.trim()}
+      className={cn(
+        VARIANT_CLASSES[variant],
+        PADDING_CLASSES[padding],
+        interactive && HOVER_CLASSES[variant],
+        className,
+      )}
     >
       {children}
     </div>

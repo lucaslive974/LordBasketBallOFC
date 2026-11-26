@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import { HeartHandshake, Instagram, MapPin, MessageCircle } from 'lucide-react';
 import { LINKS, NAV_ITEMS } from '../../data/siteContent';
+import { cn } from '../../lib/cn';
 import { BrandAvatar, Container } from '../ui';
 
 const OFFICIAL_CHANNELS: ReadonlyArray<{
@@ -88,11 +89,12 @@ function FooterChannelsColumn() {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className={`inline-flex items-center gap-2.5 text-sm transition hover:text-[#F5821F] ${
-              emphasized ? 'font-medium text-white' : ''
-            }`}
+            className={cn(
+              'inline-flex items-center gap-2.5 text-sm transition hover:text-[#F5821F]',
+              emphasized && 'font-medium text-white',
+            )}
           >
-            <Icon className={`h-4 w-4 ${iconClass}`} />
+            <Icon className={cn('h-4 w-4', iconClass)} />
             {label}
           </a>
         ))}

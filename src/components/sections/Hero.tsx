@@ -1,5 +1,6 @@
 import { ArrowRight, HeartHandshake, MapPin, MessageCircle } from 'lucide-react';
 import { assetUrl, LINKS } from '../../data/siteContent';
+import { cn } from '../../lib/cn';
 import { Badge, Button, Section } from '../ui';
 
 const HERO_HIGHLIGHTS = [
@@ -74,7 +75,7 @@ function HeroHighlights() {
     <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-slate-400">
       {HERO_HIGHLIGHTS.map((item) => (
         <span key={item.label} className="inline-flex items-center gap-2">
-          <span className={`h-2 w-2 rounded-full ${item.color}`} />
+          <span className={cn('h-2 w-2 rounded-full', item.color)} />
           {item.label}
         </span>
       ))}
