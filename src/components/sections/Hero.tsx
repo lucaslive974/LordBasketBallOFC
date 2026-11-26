@@ -87,9 +87,9 @@ function HeroShowcaseCard() {
   return (
     <div className="overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl shadow-black/60">
       <img
-        src={assetUrl('images/streetball-quadra.jpg')}
-        alt="Atletas do Lord Basketball com troféu e medalhas do Desafio 3x3"
-        className="aspect-[4/3] w-full object-cover object-top"
+        src={assetUrl('images/lider-hero.jpg')}
+        alt="Líder do projeto Lord Basketball com a equipe Sub-15 na quadra do Poliesportivo Divino Braga"
+        className="aspect-[15/14] w-full object-cover object-center"
       />
       <div className="flex items-center justify-between gap-4 border-t border-white/10 bg-slate-950/90 px-5 py-4">
         <div>
@@ -97,10 +97,10 @@ function HeroShowcaseCard() {
             Lord Basketball Oficial
           </p>
           <p className="text-xs text-slate-400">
-            @lordbasketballofc • Comunidade com +6.700 seguidores
+            @lordbasketballofc • Líder @son_o.livera &amp; Equipe Sub-15
           </p>
         </div>
-        <Badge tone="blue-dark">4º Brasileiro 3x3</Badge>
+        <Badge tone="blue-dark">Finalista Sub-15</Badge>
       </div>
     </div>
   );
