@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import { Flame, Medal, Trophy, Users } from 'lucide-react';
-import { PROGRAMS } from '../../data/siteContent';
+import { PROGRAMS } from '@data/siteContent';
 import {
   Badge,
   Card,
@@ -10,7 +10,7 @@ import {
   SectionHeader,
   StaggerGroup,
   StaggerItem,
-} from '../ui';
+} from '@ui';
 
 const PROGRAM_ICONS: readonly LucideIcon[] = [Users, Flame, Trophy, Medal];
 

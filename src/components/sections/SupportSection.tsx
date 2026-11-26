@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import { ArrowUpRight, Handshake, HeartHandshake, ShoppingBag } from 'lucide-react';
-import { LINKS, PARTNERS } from '../../data/siteContent';
+import { LINKS, PARTNERS } from '@data/siteContent';
 import {
   Badge,
   Button,
@@ -13,7 +13,7 @@ import {
   StaggerGroup,
   StaggerItem,
   type ButtonVariant,
-} from '../ui';
+} from '@ui';
 
 interface SupportOption {
   icon: LucideIcon;

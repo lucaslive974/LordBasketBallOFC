@@ -1,5 +1,5 @@
 import { Calendar, Clock, MapPin, MessageCircle } from 'lucide-react';
-import { LINKS, NUCLEI } from '../../data/siteContent';
+import { LINKS, NUCLEI } from '@data/siteContent';
 import {
   Badge,
   Button,
@@ -9,7 +9,7 @@ import {
   SectionHeader,
   StaggerGroup,
   StaggerItem,
-} from '../ui';
+} from '@ui';
 
 type NucleusEntry = (typeof NUCLEI)[number];
 type ScheduleEntry = NucleusEntry['schedules'][number];

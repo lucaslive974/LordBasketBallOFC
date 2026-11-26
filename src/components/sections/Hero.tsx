@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react';
 import { ArrowRight, HeartHandshake, MapPin, MessageCircle } from 'lucide-react';
-import { assetUrl, LINKS, MARQUEE_PHRASES } from '../../data/siteContent';
-import { cn } from '../../lib/cn';
-import { Badge, Button, Marquee } from '../ui';
+import { assetUrl, LINKS, MARQUEE_PHRASES } from '@data/siteContent';
+import { cn } from '@lib/cn';
+import { Badge, Button, Marquee } from '@ui';
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 

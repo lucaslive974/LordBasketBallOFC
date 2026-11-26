@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import { Accessibility, Award, Heart, Sparkles, Tv } from 'lucide-react';
-import { assetUrl, MINISTRY_PILLARS } from '../../data/siteContent';
+import { assetUrl, MINISTRY_PILLARS } from '@data/siteContent';
 import {
   Card,
   IconBox,
@@ -10,7 +10,7 @@ import {
   SectionHeader,
   StaggerGroup,
   StaggerItem,
-} from '../ui';
+} from '@ui';
 
 const PILLAR_ICONS: readonly LucideIcon[] = [Sparkles, Heart, Award];
 

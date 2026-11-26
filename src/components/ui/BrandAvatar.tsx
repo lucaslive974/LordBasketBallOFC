@@ -1,5 +1,5 @@
-import { assetUrl } from '../../data/siteContent';
-import { cn } from '../../lib/cn';
+import { assetUrl } from '@data/siteContent';
+import { cn } from '@lib/cn';
 
 interface BrandAvatarProps {
   brand: 'lord' | 'instituto';

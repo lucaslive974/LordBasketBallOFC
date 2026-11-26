@@ -1,8 +1,8 @@
 import type { LucideIcon } from 'lucide-react';
 import { HeartHandshake, Instagram, MapPin, MessageCircle } from 'lucide-react';
-import { LINKS, NAV_ITEMS } from '../../data/siteContent';
-import { cn } from '../../lib/cn';
-import { BrandAvatar, Container } from '../ui';
+import { LINKS, NAV_ITEMS } from '@data/siteContent';
+import { cn } from '@lib/cn';
+import { BrandAvatar, Container } from '@ui';
 
 const OFFICIAL_CHANNELS: ReadonlyArray<{
   icon: LucideIcon;

@@ -1,5 +1,5 @@
-import { IMPACT_STATS } from '../../data/siteContent';
-import { AnimatedCounter, Section, StaggerGroup, StaggerItem } from '../ui';
+import { IMPACT_STATS } from '@data/siteContent';
+import { AnimatedCounter, Section, StaggerGroup, StaggerItem } from '@ui';
 
 type StatEntry = (typeof IMPACT_STATS)[number];
 

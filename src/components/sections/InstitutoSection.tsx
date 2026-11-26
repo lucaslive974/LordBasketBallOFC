@@ -1,5 +1,5 @@
 import { ArrowUpRight, HeartHandshake, Instagram } from 'lucide-react';
-import { assetUrl, INSTITUTO_ACTIONS, LINKS } from '../../data/siteContent';
+import { assetUrl, INSTITUTO_ACTIONS, LINKS } from '@data/siteContent';
 import {
   BrandAvatar,
   Button,
@@ -9,7 +9,7 @@ import {
   Section,
   StaggerGroup,
   StaggerItem,
-} from '../ui';
+} from '@ui';
 
 type ActionEntry = (typeof INSTITUTO_ACTIONS)[number];
 

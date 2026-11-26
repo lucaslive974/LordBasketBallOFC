@@ -1,5 +1,5 @@
 import { ArrowUpRight, Instagram } from 'lucide-react';
-import { cn } from '../../lib/cn';
+import { cn } from '@lib/cn';
 import { BrandAvatar } from './BrandAvatar';
 
 interface SocialProfileCardProps {

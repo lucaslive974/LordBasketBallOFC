@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Menu, MessageCircle, X } from 'lucide-react';
-import { LINKS, NAV_ITEMS } from '../../data/siteContent';
-import { BrandAvatar, Button, Container } from '../ui';
+import { LINKS, NAV_ITEMS } from '@data/siteContent';
+import { BrandAvatar, Button, Container } from '@ui';
 
 function BrandLockup() {
   return (

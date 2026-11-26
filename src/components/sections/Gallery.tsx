@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { assetUrl, GALLERY_ITEMS, LINKS, type GalleryItem } from '../../data/siteContent';
+import { assetUrl, GALLERY_ITEMS, LINKS, type GalleryItem } from '@data/siteContent';
 import {
   Badge,
   Modal,
@@ -9,7 +9,7 @@ import {
   SocialProfileCard,
   StaggerGroup,
   StaggerItem,
-} from '../ui';
+} from '@ui';
 
 function GalleryTile({
   item,

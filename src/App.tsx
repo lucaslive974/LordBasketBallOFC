@@ -11,9 +11,9 @@ import {
   NucleiSchedule,
   Programs,
   SupportSection,
-} from './components/sections';
-import { Button, ScrollProgress } from './components/ui';
-import { LINKS } from './data/siteContent';
+} from '@sections';
+import { Button, ScrollProgress } from '@ui';
+import { LINKS } from '@data/siteContent';
 
 export function App() {
   return (
