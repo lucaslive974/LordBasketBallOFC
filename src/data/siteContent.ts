@@ -20,25 +20,42 @@ export const NAV_ITEMS = [
 
 export const IMPACT_STATS = [
   {
-    value: 'Desde 2007',
-    label: '19 anos de impacto',
+    count: 19,
+    prefix: '',
+    suffix: '+ Anos',
+    label: 'Desde 2007',
     detail: 'Nascido em Nova Contagem – MG',
   },
   {
-    value: '3 Núcleos',
+    count: 3,
+    prefix: '',
+    suffix: ' Núcleos',
     label: 'Contagem & BH',
     detail: 'Quadras abertas à comunidade',
   },
   {
-    value: '4º Lugar',
+    count: 4,
+    prefix: '',
+    suffix: 'º Lugar',
     label: 'Brasileiro 3x3',
     detail: 'Etapa Sudeste • Vila Velha (ES)',
   },
   {
-    value: '80+ Crianças',
+    count: 80,
+    prefix: '',
+    suffix: '+ Crianças',
     label: 'Ações Sociais',
     detail: 'Dia no Parque, férias e cidadania',
   },
+] as const;
+
+export const MARQUEE_PHRASES = [
+  'Jogue com Garra, Viva com Fé',
+  'Desde 2007 em Nova Contagem',
+  'Transformar Vidas • Ajudar o Próximo',
+  'Mini Basquete • As Lordianas • Lord 3x3',
+  'Inclusão Real em Quadra',
+  'Instituto Lord • Construindo o Amanhã',
 ] as const;
 
 export const MINISTRY_PILLARS = [

@@ -1,7 +1,11 @@
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react';
 import { ArrowRight, HeartHandshake, MapPin, MessageCircle } from 'lucide-react';
-import { assetUrl, LINKS } from '../../data/siteContent';
+import { assetUrl, LINKS, MARQUEE_PHRASES } from '../../data/siteContent';
 import { cn } from '../../lib/cn';
-import { Badge, Button, Section } from '../ui';
+import { Badge, Button, Marquee } from '../ui';
+
+const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
 const HERO_HIGHLIGHTS = [
   { color: 'bg-emerald-400', label: 'Treinos sociais e comunitários' },
@@ -9,16 +13,24 @@ const HERO_HIGHLIGHTS = [
   { color: 'bg-[#F5821F]', label: 'Inclusão em quadra' },
 ] as const;
 
-function HeroAmbientGlow() {
+function HeroAmbientGlow({
+  blueY,
+  orangeY,
+}: {
+  blueY: MotionValue<number>;
+  orangeY: MotionValue<number>;
+}) {
   return (
     <>
-      <div
+      <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-[#1B4FD8]/25 blur-[120px]"
+        style={{ y: blueY }}
+        className="pointer-events-none absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-[#1B4FD8]/30 blur-[120px]"
       />
-      <div
+      <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 bottom-0 h-80 w-80 rounded-full bg-[#F5821F]/20 blur-[120px]"
+        style={{ y: orangeY }}
+        className="pointer-events-none absolute right-0 bottom-12 h-80 w-80 rounded-full bg-[#F5821F]/25 blur-[120px]"
       />
     </>
   );
@@ -83,50 +95,95 @@ function HeroHighlights() {
   );
 }
 
-function HeroShowcaseCard() {
+function HeroShowcaseCard({ y }: { y: MotionValue<number> }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl shadow-black/60">
-      <img
-        src={assetUrl('images/lider-hero.jpg')}
-        alt="Líder do projeto Lord Basketball com a equipe Sub-15 na quadra do Poliesportivo Divino Braga"
-        className="aspect-[15/14] w-full object-cover object-center"
-      />
-      <div className="flex items-center justify-between gap-4 border-t border-white/10 bg-slate-950/90 px-5 py-4">
-        <div>
-          <p className="font-display text-lg font-bold tracking-wide text-white uppercase">
-            Lord Basketball Oficial
-          </p>
-          <p className="text-xs text-slate-400">
-            @lordbasketballofc • Líder @son_o.livera &amp; Equipe Sub-15
-          </p>
+    <motion.div
+      style={{ y }}
+      initial={{ opacity: 0, y: 28, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.75, delay: 0.15, ease: EASE_OUT }}
+      className="will-change-transform"
+    >
+      <div className="overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl shadow-black/60">
+        <img
+          src={assetUrl('images/lider-hero.jpg')}
+          alt="Líder do projeto Lord Basketball com a equipe Sub-15 na quadra do Poliesportivo Divino Braga"
+          className="aspect-[15/14] w-full object-cover object-center transition duration-700 hover:scale-[1.03]"
+        />
+        <div className="flex items-center justify-between gap-4 border-t border-white/10 bg-slate-950/90 px-5 py-4">
+          <div>
+            <p className="font-display text-lg font-bold tracking-wide text-white uppercase">
+              Lord Basketball Oficial
+            </p>
+            <p className="text-xs text-slate-400">
+              @lordbasketballofc • Líder @son_o.livera &amp; Equipe Sub-15
+            </p>
+          </div>
+          <Badge tone="blue-dark">Finalista Sub-15</Badge>
         </div>
-        <Badge tone="blue-dark">Finalista Sub-15</Badge>
       </div>
+    </motion.div>
+  );
+}
+
+function HeroKineticRibbon() {
+  return (
+    <div className="relative mt-16 border-y border-white/10 bg-[#F5821F] py-2.5 text-slate-950">
+      <Marquee durationSeconds={28} fadeEdges={false}>
+        {MARQUEE_PHRASES.map((phrase) => (
+          <span
+            key={phrase}
+            className="font-display inline-flex items-center gap-4 px-3 text-lg font-extrabold tracking-wider uppercase"
+          >
+            <span>{phrase}</span>
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-slate-950/60" />
+          </span>
+        ))}
+      </Marquee>
     </div>
   );
 }
 
 export function Hero() {
-  return (
-    <Section
-      id="inicio"
-      surface="dark"
-      pattern
-      className="overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-36 lg:pb-24"
-    >
-      <HeroAmbientGlow />
+  const heroRef = useRef<HTMLElement>(null);
+  const prefersReduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
 
-      <div className="relative grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-6">
+  const blueGlowY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, 120]);
+  const orangeGlowY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, -90]);
+  const copyY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, 36]);
+  const cardY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, -48]);
+
+  return (
+    <section
+      ref={heroRef}
+      id="inicio"
+      className="court-grid relative overflow-hidden bg-[#070B14] pt-28 text-white sm:pt-32 lg:pt-36"
+    >
+      <HeroAmbientGlow blueY={blueGlowY} orangeY={orangeGlowY} />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-8">
+        <motion.div
+          style={{ y: copyY }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: EASE_OUT }}
+          className="lg:col-span-6"
+        >
           <HeroCopy />
           <HeroActions />
           <HeroHighlights />
-        </div>
+        </motion.div>
 
         <div className="lg:col-span-6">
-          <HeroShowcaseCard />
+          <HeroShowcaseCard y={cardY} />
         </div>
       </div>
-    </Section>
+
+      <HeroKineticRibbon />
+    </section>
   );
 }

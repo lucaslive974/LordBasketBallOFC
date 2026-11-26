@@ -1,7 +1,16 @@
 import type { LucideIcon } from 'lucide-react';
 import { Accessibility, Award, Heart, Sparkles, Tv } from 'lucide-react';
 import { assetUrl, MINISTRY_PILLARS } from '../../data/siteContent';
-import { Card, IconBox, Section, SectionHeader } from '../ui';
+import {
+  Card,
+  IconBox,
+  ParallaxImage,
+  Reveal,
+  Section,
+  SectionHeader,
+  StaggerGroup,
+  StaggerItem,
+} from '../ui';
 
 const PILLAR_ICONS: readonly LucideIcon[] = [Sparkles, Heart, Award];
 
@@ -59,10 +68,11 @@ function InclusionCallout() {
 function GloboFeatureCard() {
   return (
     <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-xl">
-      <img
+      <ParallaxImage
         src={assetUrl('images/globo-role-das-gerais.jpg')}
         alt="Entrevista do Lord Basketball para o Rolê das Gerais da TV Globo em Nova Contagem"
-        className="aspect-[11/10] w-full object-cover"
+        className="aspect-[11/10] w-full"
+        speed={32}
       />
       <div className="absolute right-4 bottom-4 left-4 rounded-2xl bg-slate-950/85 p-4 text-white backdrop-blur-md">
         <div className="flex items-center gap-2 text-xs font-bold tracking-wider text-[#FBBF24] uppercase">
@@ -87,15 +97,17 @@ function PillarCard({
   description: string;
 }) {
   return (
-    <Card variant="muted" interactive>
-      <IconBox tone="blue">
-        <Icon className="h-5 w-5" />
-      </IconBox>
-      <h3 className="font-display mt-4 text-2xl font-bold tracking-wide text-slate-950 uppercase">
-        {title}
-      </h3>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
-    </Card>
+    <StaggerItem className="h-full">
+      <Card variant="muted" interactive className="h-full">
+        <IconBox tone="blue">
+          <Icon className="h-5 w-5" />
+        </IconBox>
+        <h3 className="font-display mt-4 text-2xl font-bold tracking-wide text-slate-950 uppercase">
+          {title}
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-slate-600">{description}</p>
+      </Card>
+    </StaggerItem>
   );
 }
 
@@ -103,21 +115,21 @@ export function AboutMinistry() {
   return (
     <Section id="sobre" surface="light">
       <div className="grid items-center gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-6">
+        <Reveal direction="left" className="lg:col-span-6">
           <MinistryStory />
           <InclusionCallout />
-        </div>
+        </Reveal>
 
-        <div className="lg:col-span-6">
+        <Reveal direction="right" delay={0.1} className="lg:col-span-6">
           <GloboFeatureCard />
-        </div>
+        </Reveal>
       </div>
 
-      <div className="mt-16 grid gap-6 md:grid-cols-3">
+      <StaggerGroup className="mt-16 grid gap-6 md:grid-cols-3">
         {MINISTRY_PILLARS.map((pillar, index) => (
           <PillarCard key={pillar.title} icon={PILLAR_ICONS[index]} {...pillar} />
         ))}
-      </div>
+      </StaggerGroup>
     </Section>
   );
 }

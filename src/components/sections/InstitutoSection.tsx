@@ -1,6 +1,15 @@
 import { ArrowUpRight, HeartHandshake, Instagram } from 'lucide-react';
 import { assetUrl, INSTITUTO_ACTIONS, LINKS } from '../../data/siteContent';
-import { BrandAvatar, Button, Card, Section } from '../ui';
+import {
+  BrandAvatar,
+  Button,
+  Card,
+  ParallaxImage,
+  Reveal,
+  Section,
+  StaggerGroup,
+  StaggerItem,
+} from '../ui';
 
 type ActionEntry = (typeof INSTITUTO_ACTIONS)[number];
 
@@ -34,10 +43,12 @@ function InstitutoHeader() {
 
 function InstitutoActionCard({ title, description }: ActionEntry) {
   return (
-    <Card variant="light" padding="sm">
-      <h3 className="text-sm font-bold text-slate-950">{title}</h3>
-      <p className="mt-1 text-xs leading-relaxed text-slate-600">{description}</p>
-    </Card>
+    <StaggerItem className="h-full">
+      <Card variant="light" padding="sm" interactive className="h-full">
+        <h3 className="text-sm font-bold text-slate-950">{title}</h3>
+        <p className="mt-1 text-xs leading-relaxed text-slate-600">{description}</p>
+      </Card>
+    </StaggerItem>
   );
 }
 
@@ -61,10 +72,11 @@ function InstitutoCtas() {
 function InstitutoPhotoHighlight() {
   return (
     <div className="relative h-full min-h-[340px] lg:col-span-5">
-      <img
+      <ParallaxImage
         src={assetUrl('images/dia-no-parque.jpg')}
         alt="80 crianças do Lord Basketball e Instituto Lord no Dia no Parque"
-        className="h-full w-full object-cover"
+        className="h-full min-h-[340px] w-full"
+        speed={34}
       />
       <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-slate-950/85 p-4 text-white backdrop-blur-md">
         <p className="text-xs font-bold tracking-wider text-[#FBBF24] uppercase">
@@ -81,23 +93,25 @@ function InstitutoPhotoHighlight() {
 export function InstitutoSection() {
   return (
     <Section id="instituto" surface="light">
-      <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-[#FAF9F6] shadow-xl">
-        <div className="grid items-center lg:grid-cols-12">
-          <div className="p-8 sm:p-12 lg:col-span-7">
-            <InstitutoHeader />
+      <Reveal>
+        <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-[#FAF9F6] shadow-xl">
+          <div className="grid items-center lg:grid-cols-12">
+            <div className="p-8 sm:p-12 lg:col-span-7">
+              <InstitutoHeader />
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              {INSTITUTO_ACTIONS.map((action) => (
-                <InstitutoActionCard key={action.title} {...action} />
-              ))}
+              <StaggerGroup className="mt-8 grid gap-4 sm:grid-cols-2">
+                {INSTITUTO_ACTIONS.map((action) => (
+                  <InstitutoActionCard key={action.title} {...action} />
+                ))}
+              </StaggerGroup>
+
+              <InstitutoCtas />
             </div>
 
-            <InstitutoCtas />
+            <InstitutoPhotoHighlight />
           </div>
-
-          <InstitutoPhotoHighlight />
         </div>
-      </div>
+      </Reveal>
     </Section>
   );
 }
