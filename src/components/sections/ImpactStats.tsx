@@ -1,14 +1,12 @@
-import { IMPACT_STATS } from '../data/siteContent';
+import { IMPACT_STATS } from '../../data/siteContent';
+import { Section } from '../ui';
 
 export function ImpactStats() {
   return (
-    <section aria-label="Números de impacto" className="bg-[#1B4FD8] text-white">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-10 sm:px-6 lg:grid-cols-4 lg:gap-8 lg:px-8">
+    <Section ariaLabel="Números de impacto" surface="brand" compact>
+      <div className="grid grid-cols-2 gap-6 lg:grid-cols-4 lg:gap-8">
         {IMPACT_STATS.map((stat) => (
-          <div
-            key={stat.label}
-            className="border-l-2 border-[#F5821F] pl-4 sm:pl-5"
-          >
+          <div key={stat.label} className="border-l-2 border-[#F5821F] pl-4 sm:pl-5">
             <p className="font-display text-3xl font-extrabold tracking-wide text-white uppercase sm:text-4xl">
               {stat.value}
             </p>
@@ -17,6 +15,6 @@ export function ImpactStats() {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

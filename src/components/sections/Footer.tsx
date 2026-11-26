@@ -1,25 +1,18 @@
 import { HeartHandshake, Instagram, MapPin, MessageCircle } from 'lucide-react';
-import { assetUrl, LINKS, NAV_ITEMS } from '../data/siteContent';
+import { LINKS, NAV_ITEMS } from '../../data/siteContent';
+import { BrandAvatar, Container } from '../ui';
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-white/10 bg-[#070B14] text-slate-300">
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className="flex items-center gap-3">
-              <img
-                src={assetUrl('images/logo-lord.jpg')}
-                alt="Logo Lord Basketball"
-                className="h-12 w-12 rounded-full border-2 border-[#F5821F] object-cover"
-              />
-              <img
-                src={assetUrl('images/logo-instituto.jpg')}
-                alt="Logo Instituto Lord"
-                className="h-12 w-12 rounded-full border border-white/40 bg-white object-cover"
-              />
+              <BrandAvatar brand="lord" size="sm" className="h-12 w-12" />
+              <BrandAvatar brand="instituto" size="sm" className="h-12 w-12" />
             </div>
             <h3 className="font-display mt-4 text-2xl font-extrabold tracking-wide text-white uppercase">
               Lord Basketball &amp; Instituto Lord
@@ -96,7 +89,7 @@ export function Footer() {
           <p>© {year} Lord Basketball &amp; Instituto Lord. Todos os direitos reservados.</p>
           <p className="italic text-slate-400">Jogue com garra, viva com fé.</p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }
