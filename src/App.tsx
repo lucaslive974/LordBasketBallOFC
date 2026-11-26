@@ -14,8 +14,11 @@ import {
 } from '@sections';
 import { Button, ScrollProgress } from '@ui';
 import { LINKS } from '@data/siteContent';
+import { useSmoothScroll } from '@hooks/useSmoothScroll';
 
 export function App() {
+  useSmoothScroll({ lerp: 0.095, wheelMultiplier: 1 });
+
   return (
     <MotionConfig reducedMotion="user">
       <div className="min-h-screen bg-[#070B14]">

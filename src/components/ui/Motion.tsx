@@ -147,7 +147,12 @@ export function ParallaxImage({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [-speed, speed]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 160,
+    damping: 30,
+    mass: 0.3,
+  });
+  const y = useTransform(smoothProgress, [0, 1], prefersReduced ? [0, 0] : [-speed, speed]);
 
   return (
     <div ref={ref} className={cn('overflow-hidden', className)}>

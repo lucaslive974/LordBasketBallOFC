@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@ui': fromRoot('./src/components/ui'),
         '@sections': fromRoot('./src/components/sections'),
+        '@hooks': fromRoot('./src/hooks'),
         '@lib': fromRoot('./src/lib'),
         '@data': fromRoot('./src/data'),
       },

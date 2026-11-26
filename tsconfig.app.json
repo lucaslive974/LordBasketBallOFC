@@ -22,6 +22,7 @@
       "@ui/*": ["./src/components/ui/*"],
       "@sections": ["./src/components/sections"],
       "@sections/*": ["./src/components/sections/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@lib/*": ["./src/lib/*"],
       "@data/*": ["./src/data/*"]
     }

@@ -15,7 +15,6 @@
 @layer base {
   html {
     font-family: var(--font-sans);
-    scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: #F5821F #070B14;
   }

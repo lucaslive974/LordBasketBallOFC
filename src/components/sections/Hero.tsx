@@ -1,5 +1,12 @@
 import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react';
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from 'motion/react';
 import { ArrowRight, HeartHandshake, MapPin, MessageCircle } from 'lucide-react';
 import { assetUrl, LINKS, MARQUEE_PHRASES } from '@data/siteContent';
 import { cn } from '@lib/cn';
@@ -151,11 +158,16 @@ export function Hero() {
     target: heroRef,
     offset: ['start start', 'end start'],
   });
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 140,
+    damping: 28,
+    mass: 0.3,
+  });
 
-  const blueGlowY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, 120]);
-  const orangeGlowY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, -90]);
-  const copyY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, 36]);
-  const cardY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [0, -48]);
+  const blueGlowY = useTransform(smoothProgress, [0, 1], prefersReduced ? [0, 0] : [0, 100]);
+  const orangeGlowY = useTransform(smoothProgress, [0, 1], prefersReduced ? [0, 0] : [0, -80]);
+  const copyY = useTransform(smoothProgress, [0, 1], prefersReduced ? [0, 0] : [0, 28]);
+  const cardY = useTransform(smoothProgress, [0, 1], prefersReduced ? [0, 0] : [0, -36]);
 
   return (
     <section
