@@ -5,8 +5,8 @@ type StatEntry = (typeof IMPACT_STATS)[number];
 
 function StatItem({ count, prefix, suffix, label, detail }: StatEntry) {
   return (
-    <StaggerItem className="border-l-2 border-[#F5821F] pl-4 sm:pl-5">
-      <p className="font-display text-3xl font-extrabold tracking-wide text-white uppercase sm:text-4xl">
+    <StaggerItem className="min-w-0 border-l-2 border-[#F5821F] pl-4 sm:pl-5">
+      <p className="font-display whitespace-nowrap text-2xl font-extrabold tracking-wide text-white uppercase sm:text-3xl lg:text-4xl">
         <AnimatedCounter to={count} prefix={prefix} suffix={suffix} />
       </p>
       <p className="mt-0.5 text-sm font-bold text-blue-100">{label}</p>

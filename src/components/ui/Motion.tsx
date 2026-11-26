@@ -201,10 +201,17 @@ export function AnimatedCounter({
   }, [isInView, to, duration, prefersReduced]);
 
   return (
-    <span ref={ref}>
-      {prefix}
-      {display}
-      {suffix}
+    <span ref={ref} className="inline-grid tabular-nums">
+      <span aria-hidden="true" className="invisible col-start-1 row-start-1">
+        {prefix}
+        {to}
+        {suffix}
+      </span>
+      <span className="col-start-1 row-start-1">
+        {prefix}
+        {display}
+        {suffix}
+      </span>
     </span>
   );
 }
