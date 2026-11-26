@@ -9,6 +9,7 @@ import {
   SocialProfileCard,
   StaggerGroup,
   StaggerItem,
+  SuspenseImage,
 } from '@ui';
 
 function GalleryTile({
@@ -26,10 +27,9 @@ function GalleryTile({
         className="group relative block w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-900 text-left transition hover:-translate-y-1 hover:border-[#F5821F]/60 focus:outline-none focus:ring-2 focus:ring-[#F5821F]"
       >
         <div className="aspect-[4/5] w-full overflow-hidden">
-          <img
+          <SuspenseImage
             src={assetUrl(item.image)}
             alt={item.title}
-            decoding="async"
             className="h-full w-full object-cover transition duration-500 will-change-transform group-hover:scale-105"
           />
         </div>
@@ -72,10 +72,11 @@ function InstagramFollowGrid() {
 function GalleryLightboxContent({ item }: { item: GalleryItem }) {
   return (
     <>
-      <img
+      <SuspenseImage
         src={assetUrl(item.image)}
         alt={item.title}
         className="max-h-[70vh] w-full bg-black object-contain"
+        skeletonClassName="aspect-[4/3]"
       />
       <div className="p-5">
         <span className="text-xs font-bold tracking-wider text-[#F5821F] uppercase">

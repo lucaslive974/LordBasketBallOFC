@@ -17,3 +17,4 @@ export {
 export { Section, type SectionSurface } from './Section';
 export { SectionHeader } from './SectionHeader';
 export { SocialProfileCard } from './SocialProfileCard';
+export { ImageSkeleton, SuspenseImage } from './SuspenseImage';

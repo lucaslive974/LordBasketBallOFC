@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { Suspense, use, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import {
   animate,
   motion,
@@ -7,8 +7,11 @@ import {
   useScroll,
   useSpring,
   useTransform,
+  type MotionValue,
 } from 'motion/react';
 import { cn } from '@lib/cn';
+import { loadAndDecodeImage } from '@lib/imageCache';
+import { ImageSkeleton } from './SuspenseImage';
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -134,6 +137,33 @@ interface ParallaxImageProps {
   speed?: number;
 }
 
+function DecodedParallaxImg({
+  src,
+  alt,
+  y,
+  className,
+}: {
+  src: string;
+  alt: string;
+  y: MotionValue<number>;
+  className?: string;
+}) {
+  use(loadAndDecodeImage(src));
+
+  return (
+    <motion.img
+      src={src}
+      alt={alt}
+      decoding="async"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.35, ease: EASE_OUT }}
+      style={{ y }}
+      className={cn('h-full w-full scale-110 object-cover will-change-transform', className)}
+    />
+  );
+}
+
 export function ParallaxImage({
   src,
   alt,
@@ -156,12 +186,9 @@ export function ParallaxImage({
 
   return (
     <div ref={ref} className={cn('overflow-hidden', className)}>
-      <motion.img
-        src={src}
-        alt={alt}
-        style={{ y }}
-        className={cn('h-full w-full scale-110 object-cover will-change-transform', imgClassName)}
-      />
+      <Suspense fallback={<ImageSkeleton tone="light" className="h-full w-full" />}>
+        <DecodedParallaxImg src={src} alt={alt} y={y} className={imgClassName} />
+      </Suspense>
     </div>
   );
 }

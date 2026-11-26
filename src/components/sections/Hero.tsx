@@ -10,7 +10,7 @@ import {
 import { ArrowRight, HeartHandshake, MapPin, MessageCircle } from 'lucide-react';
 import { assetUrl, LINKS, MARQUEE_PHRASES } from '@data/siteContent';
 import { cn } from '@lib/cn';
-import { Badge, Button, Marquee } from '@ui';
+import { Badge, Button, Marquee, SuspenseImage } from '@ui';
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 
@@ -112,9 +112,10 @@ function HeroShowcaseCard({ y }: { y: MotionValue<number> }) {
       className="will-change-transform"
     >
       <div className="overflow-hidden rounded-3xl border border-white/15 bg-slate-900 shadow-2xl shadow-black/60">
-        <img
+        <SuspenseImage
           src={assetUrl('images/lider-hero.jpg')}
           alt="Líder do projeto Lord Basketball com a equipe Sub-15 na quadra do Poliesportivo Divino Braga"
+          fetchPriority="high"
           className="aspect-[15/14] w-full object-cover object-center transition duration-700 hover:scale-[1.03]"
         />
         <div className="flex items-center justify-between gap-4 border-t border-white/10 bg-slate-950/90 px-5 py-4">
